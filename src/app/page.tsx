@@ -1,24 +1,29 @@
-import PostFeed from '@/components/PostFeed'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+// import PostFeed from '@/components/PostFeed'
+
+// export default function Home() {
+//   return (
+//     <div className="max-w-2xl mx-auto p-4 space-y-4">
+//       {/* Only displaying PostFeed now; the post creation form is handled inside PostFeed */}
+//       <PostFeed />
+//     </div>
+//   )
+// }
+"use client";
+import CreatePost from '@/components/CreatePost';
+import PostFeed from '@/components/PostFeed';
+import { useState } from 'react';
 
 export default function Home() {
+  const [refreshFeed, setRefreshFeed] = useState(0);
+
+  const handlePostCreated = () => {
+    setRefreshFeed(prev => prev + 1); // Force refresh by changing state
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-4 space-y-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Create Post</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form className="space-y-4">
-            <Textarea placeholder="What's on your mind?" />
-            <Button type="submit">Post</Button>
-          </form>
-        </CardContent>
-      </Card>
-      <PostFeed />
+      <CreatePost onPostCreated={handlePostCreated} />
+      <PostFeed key={refreshFeed} />
     </div>
-  )
+  );
 }
