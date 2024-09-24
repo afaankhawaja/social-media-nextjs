@@ -1,27 +1,3 @@
-// interface NewsColumnProps {
-//     className?: string
-//   }
-  
-//   const NewsColumn: React.FC<NewsColumnProps> = ({ className }) => {
-//     return (
-//       <aside className={`p-4 ${className}`}>
-//         <h2 className="text-xl font-bold mb-4">Latest News</h2>
-//         <ul className="space-y-2">
-//           <li>
-//             <a href="#" className="text-blue-600 hover:underline">Breaking News 1</a>
-//           </li>
-//           <li>
-//             <a href="#" className="text-blue-600 hover:underline">Trending Topic 2</a>
-//           </li>
-//           <li>
-//             <a href="#" className="text-blue-600 hover:underline">Popular Story 3</a>
-//           </li>
-//         </ul>
-//       </aside>
-//     )
-//   }
-  
-//   export default NewsColumn
 "use client"
 
 import { useEffect, useState } from "react";
@@ -34,7 +10,7 @@ interface Article {
   urlToImage: string;
 }
 
-const NewsColumn = () => {
+const MobileNews = () => {
   const [news, setNews] = useState<Article[]>([]);
   const [articleNumber, setArticleNumber] = useState(5);
   const [loading, setLoading] = useState(true);
@@ -69,7 +45,7 @@ const NewsColumn = () => {
   }
 
   return (
-    <div className="hidden lg:w-1/4 lg:flex lg:flex-col lg:space-y-6 p-4">
+    <div className="w-full flex flex-col space-y-6 p-4">
       {news.slice(0, articleNumber).map((article, index) => (
         <div 
           key={index} 
@@ -107,4 +83,4 @@ const NewsColumn = () => {
   );
 }
 
-export default NewsColumn;
+export default MobileNews;
